@@ -31,9 +31,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="To-Dos" id="gft-9v-0MJ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="yJv-Bm-fPc">
-                            <color key="tintColor" systemColor="systemGreenColor"/>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bCA-x0-7AM">
                             <color key="tintColor" systemColor="systemGreenColor"/>
                             <connections>

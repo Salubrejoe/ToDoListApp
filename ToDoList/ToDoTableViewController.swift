@@ -14,6 +14,10 @@ class ToDoTableViewController: UITableViewController {
             toDos = ToDo.loadSampleToDo()
         }
         
+        // Instantiate Edit button "intelligently"
+        navigationItem.leftBarButtonItem = editButtonItem
+        navigationItem.leftBarButtonItem?.tintColor = .systemGreen
+        
     }
 
     // MARK: - Table view data source
@@ -37,25 +41,22 @@ class ToDoTableViewController: UITableViewController {
     }
     
 
-    /*
-    // Override to support conditional editing of the table view.
+    
+    // Swipe-To-Delete BOOL - allCells == true
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+    
 
-    /*
-    // Override to support editing the table view.
+    
+    // Configure Swipe-To-Delete et alia
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            toDos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
