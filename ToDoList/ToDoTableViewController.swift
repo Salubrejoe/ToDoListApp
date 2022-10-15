@@ -19,6 +19,12 @@ class ToDoTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem?.tintColor = .systemGreen
         
     }
+    
+    
+    // Return to the To Do List method
+    @IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
+        
+    }
 
     // MARK: - Table view data source
 
@@ -26,6 +32,7 @@ class ToDoTableViewController: UITableViewController {
         return toDos.count
     }
 
+    // Cell configuration
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCell", for: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -40,14 +47,11 @@ class ToDoTableViewController: UITableViewController {
         return cell
     }
     
-
     
     // Swipe-To-Delete BOOL - allCells == true
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
-
     
     // Configure Swipe-To-Delete et alia
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
