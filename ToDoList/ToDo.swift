@@ -13,8 +13,17 @@ struct ToDo: Equatable {
     }
     
     // Retrieve [ToDo] from memory
-    static func loadToDo() -> [ToDo] {
+    static func loadToDo() -> [ToDo]? {
         return nil
+    }
+    
+    // Method to generate element of [ToDo]
+    static func loadSampleToDo() -> [ToDo] {
+        let toDo1 = ToDo(title: "To-Do One", isComplete: false, dueDate: Date(), notes: "Note One")
+        let toDo2 = ToDo(title: "To-Do Two", isComplete: false, dueDate: Date(), notes: "Note Two")
+        let toDo3 = ToDo(title: "To-Do Three", isComplete: false, dueDate: Date(), notes: "Note Three")
+        
+        return [toDo1, toDo2, toDo3]
     }
     
 }

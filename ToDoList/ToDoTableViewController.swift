@@ -6,7 +6,13 @@ class ToDoTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // Try to load items from disk
+        if let savedToDos = ToDo.loadToDo() {
+            toDos = savedToDos
+        } else {
+            toDos = ToDo.loadSampleToDo()
+        }
         
     }
 
@@ -17,7 +23,7 @@ class ToDoTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCell", for: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
         
         let toDo = toDos[indexPath.row]
