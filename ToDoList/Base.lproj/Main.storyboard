@@ -87,11 +87,18 @@
                                                         </imageReference>
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="isCompleteButtonTapped:" destination="kiI-ek-clp" eventType="touchUpInside" id="ybr-qg-mw9"/>
+                                                    </connections>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Reminde me to..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lXK-aS-osa">
                                                     <rect key="frame" x="58" y="0.0" width="292" height="50.333333333333336"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                    <connections>
+                                                        <action selector="returnPressed:" destination="kiI-ek-clp" eventType="primaryActionTriggered" id="f6w-gU-dSd"/>
+                                                        <action selector="titleEditingChanged:" destination="kiI-ek-clp" eventType="editingChanged" id="50p-w7-2z8"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -149,6 +156,9 @@
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="zBt-4c-8RK">
                                                     <rect key="frame" x="0.0" y="0.0" width="350" height="190"/>
+                                                    <connections>
+                                                        <action selector="dueDatePickerChanged:" destination="kiI-ek-clp" eventType="valueChanged" id="5q6-TG-Cuc"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -172,7 +182,6 @@
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmo...." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dcH-AU-Xff">
                                                     <rect key="frame" x="20" y="11" width="310" height="178"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -191,14 +200,14 @@
                             <tableViewSection headerTitle="Image" id="rFl-fX-I78">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="T8V-PU-QwT">
-                                        <rect key="frame" x="20" y="687.33333015441895" width="350" height="35.333332061767578"/>
+                                        <rect key="frame" x="20" y="687.33333015441895" width="350" height="34.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T8V-PU-QwT" id="1jq-TJ-sD2">
-                                            <rect key="frame" x="0.0" y="0.0" width="350" height="35.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="34.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbM-jR-Boi">
-                                                    <rect key="frame" x="0.0" y="0.0" width="47" height="35.333333333333336"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="47" height="34.666666666666664"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain">
                                                         <imageReference key="image" image="plus" catalog="system" renderingMode="hierarchical-single">
@@ -223,7 +232,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="190" id="kpb-u0-gr0">
-                                        <rect key="frame" x="20" y="722.66666221618652" width="350" height="190"/>
+                                        <rect key="frame" x="20" y="721.99999809265137" width="350" height="190"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kpb-u0-gr0" id="mvB-wP-fZ6">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="190"/>

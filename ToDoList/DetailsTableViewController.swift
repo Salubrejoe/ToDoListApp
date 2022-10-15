@@ -12,12 +12,46 @@ class DetailsTableViewController: UITableViewController, UIImagePickerController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         updateSaveButtonState()
+        updateTimeStampLabel(date: dueDatePicker.date)
+        updateDueDatePicker()
+    }
+    
+    
+    // Update Save Button State every time the value changes in the text field
+    @IBAction func titleEditingChanged(_ sender: UITextField) {
+        updateSaveButtonState()
+    }
+    
+    
+    // Dismiss the keyboard on return
+    @IBAction func returnPressed(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
+    
+    // Config CheckMark Button
+    @IBAction func isCompleteButtonTapped(_ sender: UIButton) {
+        isCompleteButton.isSelected.toggle()
+    }
+    
+    // Config Date Label
+    func updateTimeStampLabel(date: Date) {
+        timeStampLabel.text = date.formatted(.dateTime.month(.abbreviated).day().year(.twoDigits).hour().minute())
+    }
+    @IBAction func dueDatePickerChanged(_ sender: UIDatePicker) {
+        updateTimeStampLabel(date: sender.date)
+    }
+    
+    func updateDueDatePicker() {
+        dueDatePicker.minimumDate = Date().addingTimeInterval(60)
+        dueDatePicker.date = Date().addingTimeInterval(24*60*60)
     }
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
     }
     
+    // Update Save button logic
     func updateSaveButtonState() {
         let shouldEnableSaveButton = titleTextField.text?.isEmpty == false
         saveButton.isEnabled = shouldEnableSaveButton
@@ -70,4 +104,8 @@ class DetailsTableViewController: UITableViewController, UIImagePickerController
         dismiss(animated: true, completion: nil)
     }
     
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
