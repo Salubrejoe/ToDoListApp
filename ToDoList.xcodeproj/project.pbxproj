@@ -17,6 +17,7 @@
 		7CFE3BB928FAC2390033B7E1 /* ToDoListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE3BB828FAC2390033B7E1 /* ToDoListUITestsLaunchTests.swift */; };
 		7CFE3BC628FAC3640033B7E1 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE3BC528FAC3640033B7E1 /* ToDo.swift */; };
 		7CFE3BC828FAC4440033B7E1 /* ToDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE3BC728FAC4440033B7E1 /* ToDoTableViewController.swift */; };
+		7CFE3BCC28FB19550033B7E1 /* DetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE3BCB28FB19550033B7E1 /* DetailsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		7CFE3BB828FAC2390033B7E1 /* ToDoListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7CFE3BC528FAC3640033B7E1 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		7CFE3BC728FAC4440033B7E1 /* ToDoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewController.swift; sourceTree = "<group>"; };
+		7CFE3BCB28FB19550033B7E1 /* DetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				7CFE3B9528FAC2370033B7E1 /* AppDelegate.swift */,
 				7CFE3B9728FAC2370033B7E1 /* SceneDelegate.swift */,
 				7CFE3B9B28FAC2370033B7E1 /* Main.storyboard */,
+				7CFE3BCB28FB19550033B7E1 /* DetailsTableViewController.swift */,
 				7CFE3BC528FAC3640033B7E1 /* ToDo.swift */,
 				7CFE3BC728FAC4440033B7E1 /* ToDoTableViewController.swift */,
 				7CFE3B9E28FAC2390033B7E1 /* Assets.xcassets */,
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CFE3BC628FAC3640033B7E1 /* ToDo.swift in Sources */,
+				7CFE3BCC28FB19550033B7E1 /* DetailsTableViewController.swift in Sources */,
 				7CFE3BC828FAC4440033B7E1 /* ToDoTableViewController.swift in Sources */,
 				7CFE3B9628FAC2370033B7E1 /* AppDelegate.swift in Sources */,
 				7CFE3B9828FAC2370033B7E1 /* SceneDelegate.swift in Sources */,
