@@ -25,10 +25,10 @@ class ToDoTableViewController: UITableViewController {
     
     
     // MARK: - Unwind and Segue
-    
-    
+     
     // Return to the To Do List method
-    @IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
+ 
+@IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
         guard segue.identifier == "saveUnwind" else { return }
         
         let sourceViewController = segue.source as! DetailsTableViewController
@@ -46,7 +46,6 @@ class ToDoTableViewController: UITableViewController {
     }
 
     // Edit To Do Segue Action***
-    
     @IBSegueAction func editToDo(_ coder: NSCoder, sender: Any?) -> DetailsTableViewController? {
         let detailController = DetailsTableViewController(coder: coder)
                 
@@ -74,7 +73,10 @@ class ToDoTableViewController: UITableViewController {
 
     // Cell configuration
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCell", for: indexPath)
+        
+        // Downcast as! ToDoCell subclass to customize
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath) as! ToDoCell
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
         let toDo = toDos[indexPath.row]
@@ -86,7 +88,6 @@ class ToDoTableViewController: UITableViewController {
 
         return cell
     }
-    
     
     // Swipe-To-Delete BOOL - allCells == true
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
