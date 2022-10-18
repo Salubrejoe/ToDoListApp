@@ -1,6 +1,8 @@
 import UIKit
 
 class DetailsTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    
+    var toDo: ToDo?
 
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var isCompleteButton: UIButton!
@@ -9,6 +11,17 @@ class DetailsTableViewController: UITableViewController, UIImagePickerController
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    
+    // To hide cells
+    // Date Picker
+    let dueDatePickerIndexPath = IndexPath(row: 1, section: 1)
+    let timeStampLabelIndexPath = IndexPath(row: 0, section: 1)
+    var isDueDatePickerHidden: Bool = true
+    // Notes
+    let notesIndexPath = IndexPath(row: 0, section: 2)
+    // Image
+    let imageViewIndexPath = IndexPath(row: 1, section: 3)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +38,7 @@ class DetailsTableViewController: UITableViewController, UIImagePickerController
     }
     
     
-    // Dismiss the keyboard on return
+    // Dismiss the keyboard on return Text Field
     @IBAction func returnPressed(_ sender: UITextField) {
         sender.resignFirstResponder()
     }
@@ -43,12 +56,28 @@ class DetailsTableViewController: UITableViewController, UIImagePickerController
         updateTimeStampLabel(date: sender.date)
     }
     
+    // Config Date Picker
     func updateDueDatePicker() {
         dueDatePicker.minimumDate = Date().addingTimeInterval(60)
         dueDatePicker.date = Date().addingTimeInterval(24*60*60)
     }
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+    }
+    
+    // PREPARE FOR SEGUE
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        guard segue.identifier == "saveUnwind" else { return }
+        
+        let title = titleTextField.text!
+        let isComplete = isCompleteButton.isSelected
+        let dueDate = dueDatePicker.date
+        // let notes = notesTextView.text
+        // let image = imageView.image
+        
+        toDo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate)
     }
     
     // Update Save button logic
@@ -105,7 +134,39 @@ class DetailsTableViewController: UITableViewController, UIImagePickerController
     }
     
     
+    
+    // Did select Row at
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Date Picker - toggle
+        if indexPath == timeStampLabelIndexPath {
+            isDueDatePickerHidden.toggle()
+            updateTimeStampLabel(date: dueDatePicker.date)
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }
+    }
+    // Height for row at
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath {
+        case dueDatePickerIndexPath where isDueDatePickerHidden == true:
+            return 0
+        case notesIndexPath:
+            return 190
+        default:
+            return UITableView.automaticDimension
+        }
+    }
+    // Estimated height for row at
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath {
+        case dueDatePickerIndexPath:
+            return 216
+        case notesIndexPath:
+            return 190
+        default:
+            return UITableView.automaticDimension
+        }
     }
 }
