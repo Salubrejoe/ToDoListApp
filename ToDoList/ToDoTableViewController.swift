@@ -35,6 +35,22 @@ class ToDoTableViewController: UITableViewController {
         }
     }
 
+    // Edit To Do Segue Action
+    @IBSegueAction func editToDo(_ coder: NSCoder, sender: Any?) -> DetailsTableViewController? {
+        let detailController = DetailsTableViewController(coder: coder)
+        
+        guard let cell = sender as? UITableViewCell,
+              let indexPath = tableView.indexPath(for: cell) else {
+            // If Add button is selected, return empty controller
+            return detailController
+        }
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            detailController?.toDo = toDos[indexPath.row]
+        
+        return detailController
+    }
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

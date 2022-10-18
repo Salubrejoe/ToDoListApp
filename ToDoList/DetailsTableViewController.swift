@@ -130,6 +130,8 @@ class DetailsTableViewController: UITableViewController, UIImagePickerController
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         
         imageView.image = selectedImage
+//        imageView.layer.cornerRadius = 20
+    
         dismiss(animated: true, completion: nil)
     }
     
@@ -165,6 +167,8 @@ class DetailsTableViewController: UITableViewController, UIImagePickerController
             return 216
         case notesIndexPath:
             return 190
+        case imageViewIndexPath:
+            return 210
         default:
             return UITableView.automaticDimension
         }
