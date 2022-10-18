@@ -23,8 +23,22 @@ class DetailsTableViewController: UITableViewController, UIImagePickerController
     // Image
     let imageViewIndexPath = IndexPath(row: 1, section: 3)
     
+    
+    
+    // MARK: - View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let currentDueDate: Date
+        if let toDo = toDo {
+            navigationItem.title = "To-Do"
+            titleTextField.text = toDo.title
+            isCompleteButton.isSelected = toDo.isComplete
+            currentDueDate = toDo.dueDate
+            notesTextView.text = toDo.notes
+        } else {
+            currentDueDate = Date().addingTimeInterval(24*60*60)
+        }
        
         updateSaveButtonState()
         updateTimeStampLabel(date: dueDatePicker.date)
@@ -32,15 +46,30 @@ class DetailsTableViewController: UITableViewController, UIImagePickerController
     }
     
     
+    // MARK: - Text Field
     // Update Save Button State every time the value changes in the text field
     @IBAction func titleEditingChanged(_ sender: UITextField) {
         updateSaveButtonState()
     }
     
-    
     // Dismiss the keyboard on return Text Field
     @IBAction func returnPressed(_ sender: UITextField) {
         sender.resignFirstResponder()
+    }
+    
+    
+    // MARK: Update Methods
+    
+    // Config Date Picker
+    func updateDueDatePicker() {
+        dueDatePicker.minimumDate = Date().addingTimeInterval(60)
+        dueDatePicker.date = Date().addingTimeInterval(24*60*60)
+    }
+    
+    // Update Save button logic
+    func updateSaveButtonState() {
+        let shouldEnableSaveButton = titleTextField.text?.isEmpty == false
+        saveButton.isEnabled = shouldEnableSaveButton
     }
     
     // Config CheckMark Button
@@ -55,17 +84,11 @@ class DetailsTableViewController: UITableViewController, UIImagePickerController
     @IBAction func dueDatePickerChanged(_ sender: UIDatePicker) {
         updateTimeStampLabel(date: sender.date)
     }
+
+   
     
-    // Config Date Picker
-    func updateDueDatePicker() {
-        dueDatePicker.minimumDate = Date().addingTimeInterval(60)
-        dueDatePicker.date = Date().addingTimeInterval(24*60*60)
-    }
+    // MARK: PREPARE FOR SEGUE
     
-    @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
-    }
-    
-    // PREPARE FOR SEGUE
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
@@ -74,68 +97,75 @@ class DetailsTableViewController: UITableViewController, UIImagePickerController
         let title = titleTextField.text!
         let isComplete = isCompleteButton.isSelected
         let dueDate = dueDatePicker.date
-        // let notes = notesTextView.text
+        let notes = notesTextView.text
         // let image = imageView.image
         
-        toDo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate)
-    }
-    
-    // Update Save button logic
-    func updateSaveButtonState() {
-        let shouldEnableSaveButton = titleTextField.text?.isEmpty == false
-        saveButton.isEnabled = shouldEnableSaveButton
-    }
-    
-    // **IMAGE PICKER LOGIC**
-    
-    @IBAction func addImageButtonTapped(_ sender: UIButton) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        
-        // Alert Controller declaration and header
-        let alertController = UIAlertController(title: "Choose image source", message: nil, preferredStyle: .actionSheet)
-        
-        // Cancel Action
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        // Present Camera
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            
-            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { action in
-                imagePicker.sourceType = .camera
-                self.present(imagePicker, animated: true, completion: nil)
-            })
-            alertController.addAction(cameraAction)
-        }
-      
-        // Present Photo Library
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            
-            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: { action in
-                imagePicker.sourceType = .photoLibrary
-                self.present(imagePicker, animated: true, completion: nil)
-            })
-            alertController.addAction(photoLibraryAction)
+        if toDo != nil{
+            toDo?.title = title
+            toDo?.isComplete = isComplete
+            toDo?.dueDate = dueDate
+            toDo?.notes = notes
+        } else {
+            toDo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
         }
         
-        
-        alertController.popoverPresentationController?.sourceView = sender
-        
-        present(alertController, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        guard let selectedImage = info[.originalImage] as? UIImage else { return }
-        
-        imageView.image = selectedImage
-//        imageView.layer.cornerRadius = 20
+   
     
-        dismiss(animated: true, completion: nil)
-    }
+    // MARK: **IMAGE PICKER LOGIC**
+    
+//    @IBAction func addImageButtonTapped(_ sender: UIButton) {
+//        let imagePicker = UIImagePickerController()
+//        imagePicker.delegate = self
+//
+//        // Alert Controller declaration and header
+//        let alertController = UIAlertController(title: "Choose image source", message: nil, preferredStyle: .actionSheet)
+//
+//        // Cancel Action
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//        alertController.addAction(cancelAction)
+//
+//        // Present Camera
+//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+//
+//            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { action in
+//                imagePicker.sourceType = .camera
+//                self.present(imagePicker, animated: true, completion: nil)
+//            })
+//            alertController.addAction(cameraAction)
+//        }
+//
+//        // Present Photo Library
+//        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+//
+//            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: { action in
+//                imagePicker.sourceType = .photoLibrary
+//                self.present(imagePicker, animated: true, completion: nil)
+//            })
+//            alertController.addAction(photoLibraryAction)
+//        }
+//
+//
+//        alertController.popoverPresentationController?.sourceView = sender
+//
+//        present(alertController, animated: true, completion: nil)
+//    }
+//
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//
+//        guard let selectedImage = info[.originalImage] as? UIImage else { return }
+//
+//        imageView.image = selectedImage
+////        imageView.layer.cornerRadius = 20
+//
+//        dismiss(animated: true, completion: nil)
+//    }
     
     
+    
+    
+    // MARK: Table View Data Source
     
     // Did select Row at
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

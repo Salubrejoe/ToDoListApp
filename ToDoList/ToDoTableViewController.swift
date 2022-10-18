@@ -4,6 +4,8 @@ class ToDoTableViewController: UITableViewController {
     
     var toDos = [ToDo]()
 
+    
+    // MARK: View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,6 +23,10 @@ class ToDoTableViewController: UITableViewController {
     }
     
     
+    
+    // MARK: - Unwind and Segue
+    
+    
     // Return to the To Do List method
     @IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
         guard segue.identifier == "saveUnwind" else { return }
@@ -35,23 +41,28 @@ class ToDoTableViewController: UITableViewController {
         }
     }
 
-    // Edit To Do Segue Action
+    // Edit To Do Segue Action***
+    
     @IBSegueAction func editToDo(_ coder: NSCoder, sender: Any?) -> DetailsTableViewController? {
         let detailController = DetailsTableViewController(coder: coder)
-        
+                
         guard let cell = sender as? UITableViewCell,
-              let indexPath = tableView.indexPath(for: cell) else {
-            // If Add button is selected, return empty controller
-            return detailController
-        }
-            
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-            detailController?.toDo = toDos[indexPath.row]
+            let indexPath = tableView.indexPath(for: cell) else {
+        // If Add button is selected, return empty controller
+        return detailController
+    }
+                    
+        tableView.deselectRow(at: indexPath, animated: true)
+                    
+        detailController?.toDo = toDos[indexPath.row]
         
         return detailController
     }
-    // MARK: - Table view data source
+    
+    
+    
+    
+    // MARK: - Table View Data Source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDos.count
@@ -85,31 +96,6 @@ class ToDoTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
